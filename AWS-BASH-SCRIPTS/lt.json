@@ -1,0 +1,46 @@
+{
+    "IamInstanceProfile": {                                                     
+      "Arn": "arn:aws:iam::132562314553:instance-profile/ec2_service_role"             ## Launch template ((CHANGE) Arn IAM ROLES policy ec2 read (((Attention)))                 
+    },
+    "BlockDeviceMappings": [
+      {
+        "DeviceName": "/dev/sda1",
+        "Ebs": {
+          "Encrypted": false,
+          "DeleteOnTermination": true,
+          "VolumeSize": 8,
+          "VolumeType": "gp3"
+        }
+      }
+    ],
+    "NetworkInterfaces": [
+        {
+            "DeviceIndex": 0,
+            "AssociatePublicIpAddress": true,
+            "Groups": [
+                "{sg_id}"
+            ],
+            "DeleteOnTermination": true
+        }
+    ],
+    "ImageId": "{ami_id}",
+    "InstanceType": "t3.micro",
+    "KeyName": "{env}-key_ec2_ssh",
+    "TagSpecifications": [
+        {
+            "ResourceType": "instance",
+            "Tags": [
+                {
+                    "Key": "servicename",
+                    "Value": "srv-02"
+                }
+            ]
+        }
+    ],
+
+    "Monitoring": {
+      "Enabled": true
+    },
+
+    "UserData": "{userdata}"
+  }
